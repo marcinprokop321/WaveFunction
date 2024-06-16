@@ -66,10 +66,6 @@ void render(buffer id, GLFWwindow *win, Shader *sh,int mapSize)
 uint8_t waveFunc(uint8_t* map, uint8_t til, int x, int y)
 {
 	uint8_t sourround[4] = { 0 };
-		//map[int((x + 1) + (y * widht))],
-		//map[int((x - 1) + (y * widht))],
-		//map[int(x + ((y + 1) * widht))],
-		//map[int(x + ((y - 1) * widht))]
 	if (x < (widht - 1))
 		sourround[0] = map[int((x + 1) + (y * widht))]%(uint8_t)128;
 	if (x > 0)
@@ -96,10 +92,6 @@ uint8_t getBlock(double x, double y)
 {
 	int xi = translateScreenToMapX(x);
 	int yi = translateScreenToMapY(y);
-	//printf("%d ", xi);
-	//printf("%d ", yi);
-	//printf("%f ", x);
-	//printf("%f \n", y);
 	if (yi<0 || xi<0 || xi>(widht - 1) || yi>(widht - 1))
 		return 0;
 	return tiles[xi + (yi * widht)];
@@ -139,7 +131,6 @@ int main(int argc, char** argv)
 		float x = ran16(widht);
 		float y = ran16(widht);
 		int ran = ran16(chance);
-		//printf("%d\n", ran);
 		if (ran > 700 && tiles[int(x + (y * widht))] == 0)
 		    uint8_t ran = ran16(128);
 		tiles[int(x + (y * widht))] = ran;
@@ -159,7 +150,5 @@ int main(int argc, char** argv)
 		glClear(GL_COLOR_BUFFER_BIT);
 		render(xp, window, &shader,widht);
 		glfwSwapBuffers(window);
-		//Sleep(100);
-		//while(1){}
 	}
 }
